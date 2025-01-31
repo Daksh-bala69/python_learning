@@ -73,10 +73,14 @@
 #         print("ODD")
 
 # num_identifier(5)
-def sum_n(n):
-    if(n==0):
-        return 0
-    return n+sum_n(n-1)
+# def sum_n(n):
+#     if(n==0):
+#         return 0
+#     return n+sum_n(n-1)
 
-summ=sum_n(11)
-print(summ)
+# summ=sum_n(11)
+# print(summ)
+
+# import final as np
+for i in range(10):
+    print (i)
