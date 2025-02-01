@@ -13,6 +13,10 @@ count_for1=0
 count_for2=0
 count_for3=0
 
+idx_for_1=[]
+idx_for_2=[]
+idx_for_3=[]
+
 arr=result.boxes.cls.cpu().numpy()
 
 print(arr)
@@ -20,12 +24,19 @@ print(arr)
 for i in range(arr.size):
     if(arr[i]==1):
         count_for1+=1
+        idx_for_1.append(i)
+
     if(arr[i]==2):
         count_for2+=1
+        idx_for_2.append(i)
+
     if(arr[i]==3):
         count_for3+=1
+        idx_for_3.append(i)
 
-print(arr.size)
+print(idx_for_1)
+print(idx_for_2)
+print(idx_for_3)
 
 
 print(count_for1)
