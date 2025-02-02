@@ -10,10 +10,17 @@ results=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\
 for result in results:
     print(result.boxes.numpy)
 
-results1=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\8\imageuptodown_img_7_7.jpg",save=True)
+results1=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\6\images_close_img_21_6.jpg",save=True)
 
 for result1 in results1:
     print(result1.boxes.numpy)
+
+def bubbleSort(arr): 
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
 
 
@@ -180,7 +187,18 @@ for i in range(int(len(idx_for_3_front_sortedInX))):
         for j in range(int(len(idx_for_1_front))):
             if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_1_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_1_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_1_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_1_front[j]][3]):
                 idx_for_1_inside_plant2_front.append(idx_for_1_front[j])
+        for j in range(int(len(idx_for_2_front))):
+            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
+                idx_for_2_inside_plant1_front.append(idx_for_2_front[j])
 
+    if(i==1):
+        for j in range(int(len(idx_for_1_front))):
+            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_1_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_1_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_1_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_1_front[j]][3]):
+                idx_for_1_inside_plant2_front.append(idx_for_1_front[j])
+
+        for j in range(int(len(idx_for_2_front))):
+            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
+                idx_for_2_inside_plant2_front.append(idx_for_2_front[j])
         for j in range(int(len(idx_for_2_front))):
             if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
                 idx_for_2_inside_plant2_front.append(idx_for_2_front[j])
@@ -223,6 +241,20 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
         for j in range(int(len(idx_for_2_back))):
             if(coor_xy1[idx_for_3_back_sortedInX[i]][0]<=coor_xy1[idx_for_2_back[j]][0] and coor_xy1[idx_for_3_back_sortedInX[i]][1]<=coor_xy1[idx_for_2_back[j]][1] and coor_xy1[idx_for_3_back_sortedInX[i]][2]>=coor_xy1[idx_for_2_back[j]][2] and coor_xy1[idx_for_3_back_sortedInX[i]][3]>=coor_xy1[idx_for_2_back[j]][3]):
                 idx_for_2_inside_plant3_back.append(idx_for_2_back[j])
+
+
+print("1 inside plant1(front):",idx_for_1_inside_plant1_front)
+print("1 inside plant2(front):",idx_for_1_inside_plant2_front)
+print("1 inside plant3(front):",idx_for_1_inside_plant3_front)
+print("2 inside plant1(front):",idx_for_2_inside_plant1_front)
+print("2 inside plant2(front):",idx_for_2_inside_plant2_front)
+print("2 inside plant3(front):",idx_for_2_inside_plant3_front)
+print("1 inside plant1(back):",idx_for_1_inside_plant1_back)
+print("1 inside plant2(back):",idx_for_1_inside_plant2_back)
+print("1 inside plant3(back):",idx_for_1_inside_plant3_back)
+print("2 inside plant1(back):",idx_for_2_inside_plant1_back)
+print("2 inside plant2(back):",idx_for_2_inside_plant2_back)
+print("2 inside plant3(back):",idx_for_2_inside_plant3_back)
 
 
 #this is for the distance for the objects in classes '1' and '2' for the plants(front angle)(in x)
@@ -300,6 +332,20 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
 
 
 
+
+print("Distance(in x) from plant1(front) for fruit type '1':",xdistance_for_1_from_plant1_front)
+print("Distance(in x) from plant1(front) for fruit type '2':",xdistance_for_2_from_plant1_front)
+print("Distance(in x) from plant2(front) for fruit type '1':",xdistance_for_1_from_plant2_front)
+print("Distance(in x) from plant2(front) for fruit type '2':",xdistance_for_2_from_plant2_front)
+print("Distance(in x) from plant3(front) for fruit type '1':",xdistance_for_1_from_plant3_front)
+print("Distance(in x) from plant3(front) for fruit type '2':",xdistance_for_2_from_plant3_front)
+print("Distance(in x) from plant1(back) for fruit type '1':",xdistance_for_1_from_plant1_back)
+print("Distance(in x) from plant1(back) for fruit type '2':",xdistance_for_2_from_plant1_back)
+print("Distance(in x) from plant2(back) for fruit type '1':",xdistance_for_1_from_plant2_back)
+print("Distance(in x) from plant2(back) for fruit type '2':",xdistance_for_2_from_plant2_back)
+print("Distance(in x) from plant3(back) for fruit type '1':",xdistance_for_1_from_plant3_back)
+print("Distance(in x) from plant3(back) for fruit type '2':",xdistance_for_2_from_plant3_back)
+
 #this is for the distance for the objects in classes '1' and '2' for the plants(front angle)(in y)
 for i in range(int(len(idx_for_3_front_sortedInX))):
     y_for_3.append(int(coor_center[idx_for_3_front_sortedInX[i]][1]))
@@ -374,6 +420,20 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
         y_for_3.clear()
 
 
+
+
+print("Distance(in y) from plant1(front) for fruit type '1':",ydistance_for_1_from_plant1_front)
+print("Distance(in y) from plant1(front) for fruit type '2':",ydistance_for_2_from_plant1_front)
+print("Distance(in y) from plant2(front) for fruit type '1':",ydistance_for_1_from_plant2_front)
+print("Distance(in y) from plant2(front) for fruit type '2':",ydistance_for_2_from_plant2_front)
+print("Distance(in y) from plant3(front) for fruit type '1':",ydistance_for_1_from_plant3_front)
+print("Distance(in y) from plant3(front) for fruit type '2':",ydistance_for_2_from_plant3_front)
+print("Distance(in y) from plant1(back) for fruit type '1':",ydistance_for_1_from_plant1_back)
+print("Distance(in y) from plant1(back) for fruit type '2':",ydistance_for_2_from_plant1_back)
+print("Distance(in y) from plant2(back) for fruit type '1':",ydistance_for_1_from_plant2_back)
+print("Distance(in y) from plant2(back) for fruit type '2':",ydistance_for_2_from_plant2_back)
+print("Distance(in y) from plant3(back) for fruit type '1':",ydistance_for_1_from_plant3_back)
+print("Distance(in y) from plant3(back) for fruit type '2':",ydistance_for_2_from_plant3_back)
 
 
        
