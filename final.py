@@ -5,12 +5,12 @@ import math
 #for front angle
 from ultralytics import YOLO
 model=YOLO("C:\\Users\\BEAST SSJ3\\Downloads\\best.pt")
-results=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\8\imageuptodown_img_7_4.jpg",save=True)
+results=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\5\images_close_img_14_23.jpg",save=True)
 
 for result in results:
     print(result.boxes.numpy)
 
-results1=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\6\images_close_img_21_6.jpg",save=True)
+results1=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data\UAS_DTU_Round_2_Task_data\5\images_close_img_14_23_back.jpg",save=True)
 
 for result1 in results1:
     print(result1.boxes.numpy)
@@ -142,8 +142,6 @@ for i in range(arr.size):
         count_for3_front+=1
         idx_for_3_front_sortedInX.append(i)
 
-
-#loop for sorting the plants bondary boxes according to their x axis(font)
 for i in range(len(idx_for_3_front_sortedInX)):
     for j in range(len(idx_for_3_front_sortedInX)-i-1):
         if(coor_center[idx_for_3_front_sortedInX[j]][0]>coor_center[idx_for_3_front_sortedInX[j+1]][0]):
@@ -164,14 +162,13 @@ for i in range(arr1.size):
         count_for3_back+=1
         idx_for_3_back_sortedInX.append(i)
 
-
-#loop for sorting the plants bondary boxes according to their x axis(back)
 for i in range(len(idx_for_3_back_sortedInX)):
     for j in range(len(idx_for_3_back_sortedInX)-i-1):
         if(coor_center1[idx_for_3_back_sortedInX[j]][0]>coor_center1[idx_for_3_back_sortedInX[j+1]][0]):
             idx_for_3_back_sortedInX[j],idx_for_3_back_sortedInX[j+1]=idx_for_3_back_sortedInX[j+1],idx_for_3_back_sortedInX[j]
 
-
+print(idx_for_3_front_sortedInX)
+print(idx_for_3_back_sortedInX)
 #loop to fint he index of each ojbets but specific to the image/angle by checking which objects lie inside the class '3'objects(front)
 for i in range(int(len(idx_for_3_front_sortedInX))):
     if(i==0):
@@ -187,18 +184,7 @@ for i in range(int(len(idx_for_3_front_sortedInX))):
         for j in range(int(len(idx_for_1_front))):
             if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_1_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_1_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_1_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_1_front[j]][3]):
                 idx_for_1_inside_plant2_front.append(idx_for_1_front[j])
-        for j in range(int(len(idx_for_2_front))):
-            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
-                idx_for_2_inside_plant1_front.append(idx_for_2_front[j])
 
-    if(i==1):
-        for j in range(int(len(idx_for_1_front))):
-            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_1_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_1_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_1_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_1_front[j]][3]):
-                idx_for_1_inside_plant2_front.append(idx_for_1_front[j])
-
-        for j in range(int(len(idx_for_2_front))):
-            if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
-                idx_for_2_inside_plant2_front.append(idx_for_2_front[j])
         for j in range(int(len(idx_for_2_front))):
             if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
                 idx_for_2_inside_plant2_front.append(idx_for_2_front[j])
