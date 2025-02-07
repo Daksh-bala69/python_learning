@@ -15,101 +15,6 @@ results1=model.predict(r"C:\Users\BEAST SSJ3\Downloads\UAS_DTU_Round_2_Task_data
 for result1 in results1:
     print(result1.boxes.numpy)
 
-def bubbleSort(arr): 
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-
-
-
-#count for all the objects(front)
-count_for1_front=0
-count_for2_front=0
-count_for3_front=0
-
-#count for all the objects(back)
-count_for1_back=0
-count_for2_back=0
-count_for3_back=0
-
-#list of indexes of occurances of each object in the cls array(front)
-idx_for_1_front=[]
-idx_for_2_front=[]
-idx_for_3_front_sortedInX=[]
-
-#list of indexes of occurances of each object in the cls array(back)
-idx_for_1_back=[]
-idx_for_2_back=[]
-idx_for_3_back_sortedInX=[]
-
-#list of indexes of occurances of each object in the cls array but this time image specific
-idx_for_1_inside_plant1_front=[]
-idx_for_2_inside_plant1_front=[]
-idx_for_1_inside_plant2_front=[]
-idx_for_2_inside_plant2_front=[]
-idx_for_1_inside_plant3_front=[]
-idx_for_2_inside_plant3_front=[]
-
-#list of indexes of occurances of each object in the cls array but this time image specific
-idx_for_1_inside_plant1_back=[]
-idx_for_2_inside_plant1_back=[]
-idx_for_1_inside_plant2_back=[]
-idx_for_2_inside_plant2_back=[]
-idx_for_1_inside_plant3_back=[]
-idx_for_2_inside_plant3_back=[]
-
-#list of temporary x values for each object
-x_for_3=[]
-x_for_2=[]
-x_for_1=[]
-
-#list of temporary y valuas for each object
-y_for_3=[]
-y_for_2=[]
-y_for_1=[]
-
-#list of distance(in x) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(front)
-xdistance_for_1_from_plant1_front=[]
-xdistance_for_1_from_plant2_front=[]
-xdistance_for_1_from_plant3_front=[]
-xdistance_for_2_from_plant1_front=[]
-xdistance_for_2_from_plant2_front=[]
-xdistance_for_2_from_plant3_front=[]
-
-#list of distance(in x) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(back)
-xdistance_for_1_from_plant1_back=[]
-xdistance_for_1_from_plant2_back=[]
-xdistance_for_1_from_plant3_back=[]
-xdistance_for_2_from_plant1_back=[]
-xdistance_for_2_from_plant2_back=[]
-xdistance_for_2_from_plant3_back=[]
-
-#list of distance(in y) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(front)
-ydistance_for_1_from_plant1_front=[]
-ydistance_for_1_from_plant2_front=[]
-ydistance_for_1_from_plant3_front=[]
-ydistance_for_2_from_plant1_front=[]
-ydistance_for_2_from_plant2_front=[]
-ydistance_for_2_from_plant3_front=[]
-
-#list of distance(in y) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(back)
-ydistance_for_1_from_plant1_back=[]
-ydistance_for_1_from_plant2_back=[]
-ydistance_for_1_from_plant3_back=[]
-ydistance_for_2_from_plant1_back=[]
-ydistance_for_2_from_plant2_back=[]
-ydistance_for_2_from_plant3_back=[]
-
-#double counted elements which are to be substracted
-to_substract_1_from_plant1=0
-to_substract_2_from_plant1=0
-to_substract_1_from_plant2=0
-to_substract_2_from_plant2=0
-to_substract_1_from_plant3=0
-to_substract_2_from_plant3=0
-
 #array of the classes of each object detected(front)
 arr=result.boxes.cls.cpu().numpy()
 
@@ -128,6 +33,16 @@ coor_center=result.boxes.xywh.cpu().numpy()
 #array of the xywh format coordinates of each object(back)
 coor_center1=result1.boxes.xywh.cpu().numpy()
 
+#count for all the objects(front)
+count_for1_front=0
+count_for2_front=0
+count_for3_front=0
+
+#list of indexes of occurances of each object in the cls array(front)
+idx_for_1_front=[]
+idx_for_2_front=[]
+idx_for_3_front_sortedInX=[]
+
 #loop to find the index and the initial count of the obects according to their classes (including doubly counted elemts)(front)
 for i in range(arr.size):
     if(arr[i]==1):
@@ -141,12 +56,21 @@ for i in range(arr.size):
     if(arr[i]==3):
         count_for3_front+=1
         idx_for_3_front_sortedInX.append(i)
-
+#loop for sorting the indexes of the '3'rd object according to their x axis (front)
 for i in range(len(idx_for_3_front_sortedInX)):
     for j in range(len(idx_for_3_front_sortedInX)-i-1):
         if(coor_center[idx_for_3_front_sortedInX[j]][0]>coor_center[idx_for_3_front_sortedInX[j+1]][0]):
             idx_for_3_front_sortedInX[j],idx_for_3_front_sortedInX[j+1]=idx_for_3_front_sortedInX[j+1],idx_for_3_front_sortedInX[j]
 
+#count for all the objects(back)
+count_for1_back=0
+count_for2_back=0
+count_for3_back=0
+
+#list of indexes of occurances of each object in the cls array(back)
+idx_for_1_back=[]
+idx_for_2_back=[]
+idx_for_3_back_sortedInX=[]
 
 #loop to find the index and the initial count of the obects according to their classes (including doubly counted elemts)(back)
 for i in range(arr1.size):
@@ -161,14 +85,20 @@ for i in range(arr1.size):
     if(arr1[i]==3):
         count_for3_back+=1
         idx_for_3_back_sortedInX.append(i)
-
+#loop for sorting the indexes of the '3'rd object according to their x axis (back)
 for i in range(len(idx_for_3_back_sortedInX)):
     for j in range(len(idx_for_3_back_sortedInX)-i-1):
         if(coor_center1[idx_for_3_back_sortedInX[j]][0]>coor_center1[idx_for_3_back_sortedInX[j+1]][0]):
             idx_for_3_back_sortedInX[j],idx_for_3_back_sortedInX[j+1]=idx_for_3_back_sortedInX[j+1],idx_for_3_back_sortedInX[j]
 
-print(idx_for_3_front_sortedInX)
-print(idx_for_3_back_sortedInX)
+#list of indexes of occurances of each object in the cls array but this time image specific
+idx_for_1_inside_plant1_front=[]
+idx_for_2_inside_plant1_front=[]
+idx_for_1_inside_plant2_front=[]
+idx_for_2_inside_plant2_front=[]
+idx_for_1_inside_plant3_front=[]
+idx_for_2_inside_plant3_front=[]
+
 #loop to fint he index of each ojbets but specific to the image/angle by checking which objects lie inside the class '3'objects(front)
 for i in range(int(len(idx_for_3_front_sortedInX))):
     if(i==0):
@@ -198,6 +128,13 @@ for i in range(int(len(idx_for_3_front_sortedInX))):
             if(coor_xy[idx_for_3_front_sortedInX[i]][0]<=coor_xy[idx_for_2_front[j]][0] and coor_xy[idx_for_3_front_sortedInX[i]][1]<=coor_xy[idx_for_2_front[j]][1] and coor_xy[idx_for_3_front_sortedInX[i]][2]>=coor_xy[idx_for_2_front[j]][2] and coor_xy[idx_for_3_front_sortedInX[i]][3]>=coor_xy[idx_for_2_front[j]][3]):
                 idx_for_2_inside_plant3_front.append(idx_for_2_front[j])
 
+#list of indexes of occurances of each object in the cls array but this time image specific
+idx_for_1_inside_plant1_back=[]
+idx_for_2_inside_plant1_back=[]
+idx_for_1_inside_plant2_back=[]
+idx_for_2_inside_plant2_back=[]
+idx_for_1_inside_plant3_back=[]
+idx_for_2_inside_plant3_back=[]
 
 #loop to fint he index of each ojbets but specific to the image/angle by checking which objects lie inside the class '3'objects(back)
 for i in range(int(len(idx_for_3_back_sortedInX))):
@@ -228,20 +165,18 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
             if(coor_xy1[idx_for_3_back_sortedInX[i]][0]<=coor_xy1[idx_for_2_back[j]][0] and coor_xy1[idx_for_3_back_sortedInX[i]][1]<=coor_xy1[idx_for_2_back[j]][1] and coor_xy1[idx_for_3_back_sortedInX[i]][2]>=coor_xy1[idx_for_2_back[j]][2] and coor_xy1[idx_for_3_back_sortedInX[i]][3]>=coor_xy1[idx_for_2_back[j]][3]):
                 idx_for_2_inside_plant3_back.append(idx_for_2_back[j])
 
+#list of temporary x values for each object
+x_for_3=[]
+x_for_2=[]
+x_for_1=[]
 
-print("1 inside plant1(front):",idx_for_1_inside_plant1_front)
-print("1 inside plant2(front):",idx_for_1_inside_plant2_front)
-print("1 inside plant3(front):",idx_for_1_inside_plant3_front)
-print("2 inside plant1(front):",idx_for_2_inside_plant1_front)
-print("2 inside plant2(front):",idx_for_2_inside_plant2_front)
-print("2 inside plant3(front):",idx_for_2_inside_plant3_front)
-print("1 inside plant1(back):",idx_for_1_inside_plant1_back)
-print("1 inside plant2(back):",idx_for_1_inside_plant2_back)
-print("1 inside plant3(back):",idx_for_1_inside_plant3_back)
-print("2 inside plant1(back):",idx_for_2_inside_plant1_back)
-print("2 inside plant2(back):",idx_for_2_inside_plant2_back)
-print("2 inside plant3(back):",idx_for_2_inside_plant3_back)
-
+#list of distance(in x) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(front)
+xdistance_for_1_from_plant1_front=[]
+xdistance_for_1_from_plant2_front=[]
+xdistance_for_1_from_plant3_front=[]
+xdistance_for_2_from_plant1_front=[]
+xdistance_for_2_from_plant2_front=[]
+xdistance_for_2_from_plant3_front=[]
 
 #this is for the distance for the objects in classes '1' and '2' for the plants(front angle)(in x)
 for i in range(int(len(idx_for_3_front_sortedInX))):
@@ -279,6 +214,13 @@ for i in range(int(len(idx_for_3_front_sortedInX))):
             x_for_2.clear()
         x_for_3.clear()
 
+#list of distance(in x) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(back)
+xdistance_for_1_from_plant1_back=[]
+xdistance_for_1_from_plant2_back=[]
+xdistance_for_1_from_plant3_back=[]
+xdistance_for_2_from_plant1_back=[]
+xdistance_for_2_from_plant2_back=[]
+xdistance_for_2_from_plant3_back=[]
 
 #this is for the distance for the objects in classes '1' and '2' for the plants(back angle)(in x)
 for i in range(int(len(idx_for_3_back_sortedInX))):
@@ -316,21 +258,18 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
             x_for_2.clear()
         x_for_3.clear()
 
+#list of temporary y valuas for each object
+y_for_3=[]
+y_for_2=[]
+y_for_1=[]
 
-
-
-print("Distance(in x) from plant1(front) for fruit type '1':",xdistance_for_1_from_plant1_front)
-print("Distance(in x) from plant1(front) for fruit type '2':",xdistance_for_2_from_plant1_front)
-print("Distance(in x) from plant2(front) for fruit type '1':",xdistance_for_1_from_plant2_front)
-print("Distance(in x) from plant2(front) for fruit type '2':",xdistance_for_2_from_plant2_front)
-print("Distance(in x) from plant3(front) for fruit type '1':",xdistance_for_1_from_plant3_front)
-print("Distance(in x) from plant3(front) for fruit type '2':",xdistance_for_2_from_plant3_front)
-print("Distance(in x) from plant1(back) for fruit type '1':",xdistance_for_1_from_plant1_back)
-print("Distance(in x) from plant1(back) for fruit type '2':",xdistance_for_2_from_plant1_back)
-print("Distance(in x) from plant2(back) for fruit type '1':",xdistance_for_1_from_plant2_back)
-print("Distance(in x) from plant2(back) for fruit type '2':",xdistance_for_2_from_plant2_back)
-print("Distance(in x) from plant3(back) for fruit type '1':",xdistance_for_1_from_plant3_back)
-print("Distance(in x) from plant3(back) for fruit type '2':",xdistance_for_2_from_plant3_back)
+#list of distance(in y) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(front)
+ydistance_for_1_from_plant1_front=[]
+ydistance_for_1_from_plant2_front=[]
+ydistance_for_1_from_plant3_front=[]
+ydistance_for_2_from_plant1_front=[]
+ydistance_for_2_from_plant2_front=[]
+ydistance_for_2_from_plant3_front=[]
 
 #this is for the distance for the objects in classes '1' and '2' for the plants(front angle)(in y)
 for i in range(int(len(idx_for_3_front_sortedInX))):
@@ -368,6 +307,13 @@ for i in range(int(len(idx_for_3_front_sortedInX))):
             y_for_2.clear()
         y_for_3.clear()
 
+#list of distance(in y) from the centre of the '3' class object to the centre of the fruits (2,3) in a image specific manner(back)
+ydistance_for_1_from_plant1_back=[]
+ydistance_for_1_from_plant2_back=[]
+ydistance_for_1_from_plant3_back=[]
+ydistance_for_2_from_plant1_back=[]
+ydistance_for_2_from_plant2_back=[]
+ydistance_for_2_from_plant3_back=[]
 
 #this is for the distance for the objects in classes '1' and '2' for the plants(back angle)(in y)
 for i in range(int(len(idx_for_3_back_sortedInX))):
@@ -404,25 +350,15 @@ for i in range(int(len(idx_for_3_back_sortedInX))):
             ydistance_for_2_from_plant3_back.append(int(math.dist(y_for_3,y_for_2)))
             y_for_2.clear()
         y_for_3.clear()
+      
+#double counted elements which are to be substracted
+to_substract_1_from_plant1=0
+to_substract_2_from_plant1=0
+to_substract_1_from_plant2=0
+to_substract_2_from_plant2=0
+to_substract_1_from_plant3=0
+to_substract_2_from_plant3=0
 
-
-
-
-print("Distance(in y) from plant1(front) for fruit type '1':",ydistance_for_1_from_plant1_front)
-print("Distance(in y) from plant1(front) for fruit type '2':",ydistance_for_2_from_plant1_front)
-print("Distance(in y) from plant2(front) for fruit type '1':",ydistance_for_1_from_plant2_front)
-print("Distance(in y) from plant2(front) for fruit type '2':",ydistance_for_2_from_plant2_front)
-print("Distance(in y) from plant3(front) for fruit type '1':",ydistance_for_1_from_plant3_front)
-print("Distance(in y) from plant3(front) for fruit type '2':",ydistance_for_2_from_plant3_front)
-print("Distance(in y) from plant1(back) for fruit type '1':",ydistance_for_1_from_plant1_back)
-print("Distance(in y) from plant1(back) for fruit type '2':",ydistance_for_2_from_plant1_back)
-print("Distance(in y) from plant2(back) for fruit type '1':",ydistance_for_1_from_plant2_back)
-print("Distance(in y) from plant2(back) for fruit type '2':",ydistance_for_2_from_plant2_back)
-print("Distance(in y) from plant3(back) for fruit type '1':",ydistance_for_1_from_plant3_back)
-print("Distance(in y) from plant3(back) for fruit type '2':",ydistance_for_2_from_plant3_back)
-
-
-       
 #this is to find the number of elements double counted (with error)
 for i in range(len(ydistance_for_1_from_plant1_front)):
     for j in range(len(ydistance_for_1_from_plant1_back)):
@@ -453,7 +389,6 @@ for i in range(len(ydistance_for_2_from_plant3_front)):
     for j in range(len(ydistance_for_2_from_plant3_back)):
         if(abs(ydistance_for_2_from_plant3_front[i]-ydistance_for_2_from_plant3_back[j]<=3) and (abs(xdistance_for_2_from_plant3_front[i]-xdistance_for_2_from_plant3_back[j])<=4)):
             to_substract_2_from_plant3+=1
-
 
 print("Total count of fruit '1' in Plant1:",len(idx_for_1_inside_plant1_front)+len(idx_for_1_inside_plant1_back)-to_substract_1_from_plant1)
 print("Total count of fruit '2' in Plant1:",len(idx_for_2_inside_plant1_front)+len(idx_for_2_inside_plant1_back)-to_substract_2_from_plant1)
